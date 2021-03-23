@@ -1,0 +1,343 @@
+{
+    "Raw": {
+        "sizes": [
+            1
+        ],
+        "detail": {
+            "main": {
+                "type": "tab-area",
+                "widgets": [
+                    "PERSPECTIVE_GENERATED_ID_0"
+                ],
+                "currentIndex": 0
+            }
+        },
+        "mode": "globalFilters",
+        "viewers": {
+            "PERSPECTIVE_GENERATED_ID_0": {
+                "plugin": "datagrid",
+                "columns": [
+                    "Unique Id",
+                    "First Name",
+                    "Last Name",
+                    "Rank",
+                    "Command",
+                    "ShieldNo",
+                    "Complaint Id",
+                    "Incident Date",
+                    "FADO Type",
+                    "Allegation",
+                    "Board Disposition",
+                    "NYPDDisposition",
+                    "PenaltyDesc"
+                ],
+                "selectable": null,
+                "editable": null,
+                "computed-columns": null,
+                "row-pivots": null,
+                "column-pivots": null,
+                "aggregates": null,
+                "filters": null,
+                "sort": null,
+                "master": false,
+                "name": "Incidents (Github)",
+                "table": "github-incidents",
+                "linked": false
+            }
+        }
+    },
+    "Incidents per Month": {
+        "sizes": [
+            1
+        ],
+        "detail": {
+            "main": {
+                "type": "tab-area",
+                "widgets": [
+                    "PERSPECTIVE_GENERATED_ID_0"
+                ],
+                "currentIndex": 0
+            }
+        },
+        "mode": "globalFilters",
+        "viewers": {
+            "PERSPECTIVE_GENERATED_ID_0": {
+                "plugin": "d3_y_line",
+                "columns": [
+                    "Unique Id"
+                ],
+                "row-pivots": [
+                    "month_bucket(Incident Date)"
+                ],
+                "computed-columns": [
+                    "month_bucket(\"Incident Date\")"
+                ],
+                "aggregates": {
+                    "Unique Id": "distinct count"
+                },
+                "filters": [
+                    [
+                        "Incident Date",
+                        "is not null",
+                        "1/7/1985"
+                    ]
+                ],
+                "selectable": null,
+                "editable": null,
+                "column-pivots": null,
+                "sort": null,
+                "plugin_config": {
+                    "realValues": [
+                        "Unique Id"
+                    ]
+                },
+                "master": false,
+                "name": "Incidents (Github)",
+                "table": "github-incidents",
+                "linked": false
+            }
+        }
+    },
+    "Incidents per Month by FADO": {
+        "sizes": [
+            1
+        ],
+        "detail": {
+            "main": {
+                "type": "split-area",
+                "orientation": "vertical",
+                "children": [
+                    {
+                        "type": "tab-area",
+                        "widgets": [
+                            "PERSPECTIVE_GENERATED_ID_0"
+                        ],
+                        "currentIndex": 0
+                    },
+                    {
+                        "type": "tab-area",
+                        "widgets": [
+                            "PERSPECTIVE_GENERATED_ID_1"
+                        ],
+                        "currentIndex": 0
+                    }
+                ],
+                "sizes": [
+                    0.5,
+                    0.5
+                ]
+            }
+        },
+        "mode": "globalFilters",
+        "viewers": {
+            "PERSPECTIVE_GENERATED_ID_0": {
+                "plugin": "d3_y_line",
+                "columns": [
+                    "Unique Id"
+                ],
+                "computed-columns": [
+                    "month_bucket(\"Incident Date\")"
+                ],
+                "row-pivots": [
+                    "month_bucket(Incident Date)"
+                ],
+                "aggregates": {
+                    "Unique Id": "distinct count"
+                },
+                "filters": [
+                    [
+                        "Incident Date",
+                        "is not null",
+                        "1/7/1985"
+                    ]
+                ],
+                "column-pivots": [
+                    "FADO Type"
+                ],
+                "selectable": null,
+                "editable": null,
+                "sort": null,
+                "plugin_config": {
+                    "realValues": [
+                        "Unique Id"
+                    ]
+                },
+                "master": false,
+                "name": "Incidents (Github)",
+                "table": "github-incidents",
+                "linked": false
+            },
+            "PERSPECTIVE_GENERATED_ID_1": {
+                "plugin": "d3_y_area",
+                "computed-columns": [
+                    "month_bucket(\"Incident Date\")"
+                ],
+                "row-pivots": [
+                    "month_bucket(Incident Date)"
+                ],
+                "column-pivots": [
+                    "FADO Type"
+                ],
+                "aggregates": {
+                    "Unique Id": "distinct count"
+                },
+                "filters": [
+                    [
+                        "Incident Date",
+                        "is not null",
+                        "1/7/1985"
+                    ]
+                ],
+                "columns": [
+                    "Unique Id"
+                ],
+                "selectable": null,
+                "editable": null,
+                "sort": null,
+                "plugin_config": {
+                    "realValues": [
+                        "Unique Id"
+                    ]
+                },
+                "master": false,
+                "name": "Incidents (Github)",
+                "table": "github-incidents",
+                "linked": false
+            }
+        }
+    },
+    "Total Complaints vs Officer Count by Command and FADO": {
+        "sizes": [
+            1
+        ],
+        "detail": {
+            "main": {
+                "type": "split-area",
+                "orientation": "horizontal",
+                "children": [
+                    {
+                        "type": "tab-area",
+                        "widgets": [
+                            "PERSPECTIVE_GENERATED_ID_0"
+                        ],
+                        "currentIndex": 0
+                    },
+                    {
+                        "type": "tab-area",
+                        "widgets": [
+                            "PERSPECTIVE_GENERATED_ID_1"
+                        ],
+                        "currentIndex": 0
+                    }
+                ],
+                "sizes": [
+                    0.5,
+                    0.5
+                ]
+            }
+        },
+        "mode": "globalFilters",
+        "viewers": {
+            "PERSPECTIVE_GENERATED_ID_0": {
+                "plugin": "d3_xy_scatter",
+                "columns": [
+                    "ShieldNo",
+                    "Complaint Id",
+                    null,
+                    null,
+                    null
+                ],
+                "row-pivots": [
+                    "Command"
+                ],
+                "aggregates": {
+                    "ShieldNo": "distinct count",
+                    "Unique Id": "distinct count",
+                    "Complaint Id": "distinct count"
+                },
+                "column-pivots": [
+                    "FADO Type"
+                ],
+                "filters": [
+                    [
+                        "Complaint Id",
+                        "is not null",
+                        null
+                    ],
+                    [
+                        "Active",
+                        "==",
+                        "active"
+                    ]
+                ],
+                "selectable": null,
+                "editable": null,
+                "computed-columns": null,
+                "sort": null,
+                "plugin_config": {
+                    "realValues": [
+                        "ShieldNo",
+                        "Complaint Id",
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                "master": false,
+                "name": "Active Officer Incidents (Github)",
+                "table": "github-incidents",
+                "linked": false
+            },
+            "PERSPECTIVE_GENERATED_ID_1": {
+                "plugin": "d3_xy_scatter",
+                "row-pivots": [
+                    "Command"
+                ],
+                "column-pivots": [
+                    "FADO Type"
+                ],
+                "aggregates": {
+                    "ShieldNo": "distinct count",
+                    "Unique Id": "distinct count",
+                    "Complaint Id": "distinct count"
+                },
+                "filters": [
+                    [
+                        "Complaint Id",
+                        "is not null",
+                        null
+                    ],
+                    [
+                        "Active",
+                        "==",
+                        "inactive"
+                    ]
+                ],
+                "columns": [
+                    "ShieldNo",
+                    "Complaint Id",
+                    null,
+                    null,
+                    null
+                ],
+                "selectable": null,
+                "editable": null,
+                "computed-columns": null,
+                "sort": null,
+                "plugin_config": {
+                    "realValues": [
+                        "ShieldNo",
+                        "Complaint Id",
+                        null,
+                        null,
+                        null
+                    ]
+                },
+                "master": false,
+                "name": "Inactive Officer Incidents (Github)",
+                "table": "github-incidents",
+                "linked": false
+            }
+        }
+    }
+}
