@@ -141,6 +141,9 @@
                 "row-pivots": [
                     "month_bucket(Incident Date)"
                 ],
+                "column-pivots": [
+                    "FADO Type"
+                ],
                 "aggregates": {
                     "Unique Id": "distinct count"
                 },
@@ -150,9 +153,6 @@
                         "is not null",
                         "1/7/1985"
                     ]
-                ],
-                "column-pivots": [
-                    "FADO Type"
                 ],
                 "selectable": null,
                 "editable": null,
@@ -175,9 +175,6 @@
                 "row-pivots": [
                     "month_bucket(Incident Date)"
                 ],
-                "column-pivots": [
-                    "FADO Type"
-                ],
                 "aggregates": {
                     "Unique Id": "distinct count"
                 },
@@ -191,9 +188,17 @@
                 "columns": [
                     "Unique Id"
                 ],
+                "column-pivots": [
+                    "FADO Type"
+                ],
+                "sort": [
+                    [
+                        "Unique Id",
+                        "col asc"
+                    ]
+                ],
                 "selectable": null,
                 "editable": null,
-                "sort": null,
                 "plugin_config": {
                     "realValues": [
                         "Unique Id"
@@ -335,6 +340,276 @@
                 },
                 "master": false,
                 "name": "Inactive Officer Incidents (Github)",
+                "table": "github-incidents",
+                "linked": false
+            }
+        }
+    },
+    "Incidents by Allegation, time series": {
+        "sizes": [
+            0.25,
+            0.75
+        ],
+        "detail": {
+            "main": {
+                "type": "tab-area",
+                "widgets": [
+                    "PERSPECTIVE_GENERATED_ID_0"
+                ],
+                "currentIndex": 0
+            }
+        },
+        "mode": "globalFilters",
+        "master": {
+            "widgets": [
+                "PERSPECTIVE_GENERATED_ID_1"
+            ],
+            "sizes": [
+                1
+            ]
+        },
+        "viewers": {
+            "PERSPECTIVE_GENERATED_ID_1": {
+                "plugin": "datagrid",
+                "computed-columns": [
+                    "month_bucket(\"Incident Date\")"
+                ],
+                "aggregates": {
+                    "Unique Id": "distinct count",
+                    "Complaint Id": "distinct count"
+                },
+                "columns": [
+                    "Complaint Id"
+                ],
+                "row-pivots": [
+                    "FADO Type",
+                    "Allegation"
+                ],
+                "sort": [
+                    [
+                        "Complaint Id",
+                        "desc"
+                    ]
+                ],
+                "filters": [
+                    [
+                        "Allegation",
+                        "==",
+                        null,
+                        "string",
+                        "count"
+                    ]
+                ],
+                "selectable": true,
+                "editable": null,
+                "column-pivots": null,
+                "master": true,
+                "name": "Incidents (Github) (duplicate)",
+                "table": "github-incidents",
+                "linked": false
+            },
+            "PERSPECTIVE_GENERATED_ID_0": {
+                "plugin": "d3_y_line",
+                "columns": [
+                    "Unique Id"
+                ],
+                "computed-columns": [
+                    "month_bucket(\"Incident Date\")"
+                ],
+                "row-pivots": [
+                    "month_bucket(Incident Date)"
+                ],
+                "column-pivots": [
+                    "FADO Type"
+                ],
+                "aggregates": {
+                    "Unique Id": "distinct count"
+                },
+                "filters": [
+                    [
+                        "Incident Date",
+                        "is not null",
+                        "1/7/1985"
+                    ]
+                ],
+                "selectable": null,
+                "editable": null,
+                "sort": null,
+                "plugin_config": {
+                    "realValues": [
+                        "Unique Id"
+                    ]
+                },
+                "master": false,
+                "name": "Incidents (Github)",
+                "table": "github-incidents",
+                "linked": false
+            }
+        }
+    },
+    "Allegation reporting change 95-00": {
+        "sizes": [
+            1
+        ],
+        "detail": {
+            "main": {
+                "type": "tab-area",
+                "widgets": [
+                    "PERSPECTIVE_GENERATED_ID_2"
+                ],
+                "currentIndex": 0
+            }
+        },
+        "mode": "globalFilters",
+        "viewers": {
+            "PERSPECTIVE_GENERATED_ID_2": {
+                "plugin": "d3_heatmap",
+                "computed-columns": [
+                    "month_bucket(\"Incident Date\")",
+                    "month_of_year(\"Incident Date\")",
+                    "day_of_week(\"Incident Date\")",
+                    "year_bucket(\"Incident Date\")"
+                ],
+                "row-pivots": [
+                    "year_bucket(Incident Date)"
+                ],
+                "aggregates": {
+                    "Unique Id": "distinct count",
+                    "Complaint Id": "distinct count"
+                },
+                "filters": [
+                    [
+                        "Incident Date",
+                        "is not null",
+                        "1/7/1985"
+                    ]
+                ],
+                "columns": [
+                    "Complaint Id"
+                ],
+                "column-pivots": [
+                    "Allegation"
+                ],
+                "sort": [
+                    [
+                        "Complaint Id",
+                        "col asc"
+                    ]
+                ],
+                "selectable": null,
+                "editable": null,
+                "plugin_config": {
+                    "realValues": [
+                        "Complaint Id"
+                    ]
+                },
+                "master": false,
+                "name": "Incidents (Github) (duplicate)",
+                "table": "github-incidents",
+                "linked": false
+            }
+        }
+    },
+    "Day-of-week incident Heatmap": {
+        "sizes": [
+            0.25,
+            0.75
+        ],
+        "detail": {
+            "main": {
+                "type": "tab-area",
+                "widgets": [
+                    "PERSPECTIVE_GENERATED_ID_0"
+                ],
+                "currentIndex": 0
+            }
+        },
+        "mode": "globalFilters",
+        "master": {
+            "widgets": [
+                "PERSPECTIVE_GENERATED_ID_1"
+            ],
+            "sizes": [
+                1
+            ]
+        },
+        "viewers": {
+            "PERSPECTIVE_GENERATED_ID_1": {
+                "selectable": true,
+                "plugin": "datagrid",
+                "computed-columns": [
+                    "month_bucket(\"Incident Date\")"
+                ],
+                "row-pivots": [
+                    "FADO Type",
+                    "Allegation"
+                ],
+                "aggregates": {
+                    "Unique Id": "distinct count",
+                    "Complaint Id": "distinct count"
+                },
+                "filters": [
+                    [
+                        "Allegation",
+                        "==",
+                        null,
+                        "string",
+                        "count"
+                    ]
+                ],
+                "sort": [
+                    [
+                        "Complaint Id",
+                        "desc"
+                    ]
+                ],
+                "columns": [
+                    "Complaint Id"
+                ],
+                "editable": null,
+                "column-pivots": null,
+                "master": true,
+                "name": "Incidents (Github) (duplicate)",
+                "table": "github-incidents",
+                "linked": false
+            },
+            "PERSPECTIVE_GENERATED_ID_0": {
+                "plugin": "d3_heatmap",
+                "computed-columns": [
+                    "month_bucket(\"Incident Date\")",
+                    "month_of_year(\"Incident Date\")",
+                    "day_of_week(\"Incident Date\")"
+                ],
+                "row-pivots": [
+                    "month_of_year(Incident Date)"
+                ],
+                "column-pivots": [
+                    "day_of_week(Incident Date)"
+                ],
+                "aggregates": {
+                    "Unique Id": "distinct count",
+                    "Complaint Id": "distinct count"
+                },
+                "filters": [
+                    [
+                        "Incident Date",
+                        "is not null",
+                        "1/7/1985"
+                    ]
+                ],
+                "columns": [
+                    "Complaint Id"
+                ],
+                "selectable": null,
+                "editable": null,
+                "sort": null,
+                "plugin_config": {
+                    "realValues": [
+                        "Complaint Id"
+                    ]
+                },
+                "master": false,
+                "name": "Incidents (Github)",
                 "table": "github-incidents",
                 "linked": false
             }
