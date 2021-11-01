@@ -92,7 +92,7 @@ window.addEventListener("load", async () => {
             return;
         }
         window.workspace.innerHTML = "";
-        await window.workspace.restore(layouts[window.layouts.value]);
+        await window.workspace.restore(LAYOUTS[window.layouts.value]);
         window.name_input.value = window.layouts.value;
     });
 
@@ -125,7 +125,7 @@ window.addEventListener("load", async () => {
     });
 
     window.save.addEventListener("click", async () => {
-        const token = window.workspace.save();
+        const token = await window.workspace.save();
         const new_name = window.name_input.value;
         LAYOUTS[new_name] = token;
         set_layout_options();
