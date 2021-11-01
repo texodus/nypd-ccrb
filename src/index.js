@@ -91,6 +91,7 @@ window.addEventListener("load", async () => {
         if (window.layouts.value.trim().length === 0) {
             return;
         }
+        window.workspace.innerHTML = "";
         await window.workspace.restore(layouts[window.layouts.value]);
         window.name_input.value = window.layouts.value;
     });
