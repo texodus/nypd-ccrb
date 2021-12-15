@@ -14,7 +14,11 @@ perspective-workspace {
 
 button {
     background-color: inherit;
-    border: 1px solid rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+
+button:hover {
+    border: 1px solid #00f !important;
 }
 
 body {
@@ -31,7 +35,6 @@ body {
     left: 0;
     right: 0;
     height: 36px;
-    background-color: #F2F4F6;
 }
 
 #workspace {

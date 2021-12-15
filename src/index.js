@@ -1,18 +1,42 @@
-import perspective from "@finos/perspective/dist/esm/perspective.parallel.js";
+import perspective from "@finos/perspective";
 
 import "@finos/perspective-workspace";
 import "@finos/perspective-viewer-datagrid";
 import "@finos/perspective-viewer-d3fc";
 
-import "@finos/perspective-workspace/dist/umd/material.css";
+import dark_theme from "@finos/perspective-workspace/dist/css/material.dark.css";
+import light_theme from "@finos/perspective-workspace/dist/css/material.css";
 
 import "./index.css";
+import "./light.css";
+import "./dark.css";
 
 import layouts from "./layout.json";
 
 let LAYOUTS = localStorage.getItem("layouts") ? JSON.parse(localStorage.getItem("layouts")) : layouts;
 
 const worker = perspective.worker();
+
+const theme_style_node = document.createElement("style");
+document.head.appendChild(theme_style_node);
+
+function toggle_theme() {
+    if (theme_style_node.dataset.theme === "light") {
+        theme_style_node.textContent = dark_theme;
+        theme_style_node.dataset.theme = "dark";
+        document.body.classList.add("dark");
+        window.theme.textContent = "Light Theme";
+    } else {
+        theme_style_node.textContent = light_theme;
+        theme_style_node.dataset.theme = "light";
+        document.body.classList.remove("dark");
+        window.theme.textContent = "Dark Theme";
+    }
+
+    for (const view of document.querySelectorAll("perspective-viewer")) {
+        view.restyleElement();
+    }
+}
 
 async function fetch_progress(url) {
     const response = await fetch(url);
@@ -28,7 +52,6 @@ async function fetch_progress(url) {
 
         chunks.push(value);
         receivedLength += value.length;
-        //console.log(`Received ${receivedLength} of ${contentLength}`);
         window.message.textContent = `Downloading (${((100 * receivedLength) / contentLength).toFixed(1)}%)`;
     }
 
@@ -43,6 +66,7 @@ async function fetch_progress(url) {
 }
 
 window.addEventListener("load", async () => {
+
     document.body.innerHTML = `
         <style>
 
@@ -54,6 +78,7 @@ window.addEventListener("load", async () => {
             <input id="name_input" style="display: none"></input>
             <button id="save" style="display: none">Save</button>
             <button id="cancel" style="display: none">Cancel</button>
+            <button id="theme" style="float: right">Light Theme</button>
             <button id="copy" style="float: right">Debug to Clipboard</button>
             <button id="reset" style="float: right">Reset LocalStorage</button>
             <a href="https://github.com/texodus/nypd-ccrb">NYCLU/CCRB Data</a>
@@ -62,6 +87,8 @@ window.addEventListener("load", async () => {
         <perspective-workspace id='workspace'>
         </perspective-workspace>
     `.trim();
+
+    toggle_theme();
 
     window.workspace.addTable(
         "github-incidents",
@@ -145,4 +172,6 @@ window.addEventListener("load", async () => {
             window.copy.innerText = "Debug to Clipboard";
         }, 1000);
     });
+
+    window.theme.addEventListener("click", toggle_theme);
 });

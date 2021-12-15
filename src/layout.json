@@ -230,7 +230,7 @@
         "columns": ["Complaint Id"],
         "row_pivots": ["FADO Type", "Allegation"],
         "sort": [["Complaint Id", "desc"]],
-        "filter": [["Allegation", "==", null]],
+        "filter": [],
         "selectable": true,
         "editable": null,
         "column_pivots": null,

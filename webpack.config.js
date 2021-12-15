@@ -30,6 +30,11 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [{loader: "style-loader"}, {loader: "css-loader"}],
             },
+            {
+                test: /\.css$/,
+                include: /@finos/,
+                use: [{loader: "css-loader"}],
+            },
         ],
     },
     stats: {
