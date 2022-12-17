@@ -1,10 +1,11 @@
-import perspective from "@finos/perspective";
+import perspective from "@finos/perspective/dist/umd/perspective.js";
 
-import "@finos/perspective-workspace";
-import "@finos/perspective-viewer-datagrid";
-import "@finos/perspective-viewer-d3fc";
+import "@finos/perspective-workspace/dist/umd/perspective-workspace.js";
+import "@finos/perspective-viewer-datagrid/dist/umd/perspective-viewer-datagrid.js";
+import "@finos/perspective-viewer-d3fc/dist/umd/perspective-viewer-d3fc.js";
+import "@finos/perspective-viewer-openlayers/dist/umd/perspective-viewer-openlayers.js";
 
-import dark_theme from "@finos/perspective-workspace/dist/css/material.dark.css";
+import dark_theme from "@finos/perspective-workspace/dist/css/material-dark.css";
 import light_theme from "@finos/perspective-workspace/dist/css/material.css";
 
 import "./index.css";
@@ -13,7 +14,9 @@ import "./dark.css";
 
 import layouts from "./layout.json";
 
-let LAYOUTS = localStorage.getItem("layouts") ? JSON.parse(localStorage.getItem("layouts")) : layouts;
+let LAYOUTS = localStorage.getItem("layouts")
+    ? JSON.parse(localStorage.getItem("layouts"))
+    : layouts;
 
 const worker = perspective.worker();
 
@@ -26,16 +29,22 @@ function toggle_theme() {
         theme_style_node.dataset.theme = "dark";
         document.body.classList.add("dark");
         window.theme.textContent = "Light Theme";
+        for (const view of document.querySelectorAll("perspective-viewer")) {
+            view.setAttribute("theme", "Material Dark");
+            view.restyleElement();
+        }
     } else {
         theme_style_node.textContent = light_theme;
         theme_style_node.dataset.theme = "light";
         document.body.classList.remove("dark");
         window.theme.textContent = "Dark Theme";
+        for (const view of document.querySelectorAll("perspective-viewer")) {
+            view.setAttribute("theme", "Material Light");
+            view.restyleElement();
+        }
     }
 
-    for (const view of document.querySelectorAll("perspective-viewer")) {
-        view.restyleElement();
-    }
+    // document.querySelector("perspective-workspace").restyle();
 }
 
 async function fetch_progress(url) {
@@ -45,14 +54,17 @@ async function fetch_progress(url) {
     let receivedLength = 0;
     let chunks = [];
     while (true) {
-        const {done, value} = await reader.read();
+        const { done, value } = await reader.read();
         if (done) {
             break;
         }
 
         chunks.push(value);
         receivedLength += value.length;
-        window.message.textContent = `Downloading (${((100 * receivedLength) / contentLength).toFixed(1)}%)`;
+        window.message.textContent = `Downloading (${(
+            (100 * receivedLength) /
+            contentLength
+        ).toFixed(1)}%)`;
     }
 
     let chunksAll = new Uint8Array(receivedLength);
@@ -66,7 +78,6 @@ async function fetch_progress(url) {
 }
 
 window.addEventListener("load", async () => {
-
     document.body.innerHTML = `
         <style>
 
@@ -108,7 +119,9 @@ window.addEventListener("load", async () => {
         window.layouts.innerHTML = "";
         console.log(layout_names);
         for (const layout of layout_names) {
-            window.layouts.innerHTML += `<option${layout === selected_layout ? " selected='true'" : ""}>${layout}</option>`;
+            window.layouts.innerHTML += `<option${
+                layout === selected_layout ? " selected='true'" : ""
+            }>${layout}</option>`;
         }
     }
 
