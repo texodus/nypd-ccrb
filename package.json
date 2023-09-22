@@ -1,39 +1,18 @@
 {
     "name": "nypd",
     "private": true,
-    "version": "0.6.2",
+    "version": "0.7.0",
+    "type": "module",
     "description": "An example app built using `@finos/perspective-viewer`.",
     "scripts": {
-        "start": "yarn webpack serve",
-        "build": "yarn webpack"
+        "build": "node index.js"
     },
     "keywords": [],
     "license": "Apache-2.0",
     "dependencies": {
-        "@finos/perspective": "^1.8.1",
-        "@finos/perspective-workspace": "^1.8.1",
-        "@finos/perspective-viewer": "^1.8.1",
-        "@finos/perspective-viewer-d3fc": "^1.8.1",
-        "@finos/perspective-viewer-datagrid": "^1.8.1",
-        "@finos/perspective-viewer-openlayers": "^1.8.1",
-        "babel-eslint": "^10.1.0",
-        "eslint": "^7.22.0",
-        "eslint-config-prettier": "^3.0.1",
-        "eslint-plugin-markdown": "^1.0.2",
-        "eslint-plugin-prettier": "^2.6.2",
-        "node-fetch": "^2.6.1",
-        "prettier": "^2.2.1",
-        "superstore-arrow": "^1.0.0"
+        "@finos/perspective": "^2.5.0",
+        "@zip.js/zip.js": "^2.7.27",
+        "stoppable": "1.1.0"
     },
-    "devDependencies": {
-        "@finos/perspective-webpack-plugin": "^1.8.1",
-        "css-loader": "^0.28.7",
-        "file-loader": "^6.2.0",
-        "html-webpack-plugin": "^4.5.1",
-        "string-replace-loader": "^3.0.1",
-        "style-loader": "^0.18.2",
-        "webpack": "^5.14.0",
-        "webpack-cli": "^4.3.1",
-        "webpack-dev-server": "^3.11.2"
-    }
+    "devDependencies": {}
 }
